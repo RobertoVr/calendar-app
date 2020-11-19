@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'moment/locale/es'
@@ -6,20 +6,36 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import { Navbar } from '../ui/Navbar';
 import { messages } from '../../helpers/calendar-messages-es';
+import { CalendarEvent } from './CalendarEvent';
+import { CalendarModal } from './CalendarModal';
 
 moment.locale('es');
 const localizer = momentLocalizer(moment) // or globalizeLocalizer
 
-const myEventsList = [
-    {
-        title: 'Cumple',
-        start: moment().toDate(),
-        end: moment().add(2, 'hours').toDate(),
-        bgcolor: '#fafafafa'
-    }
-]
 
 export const CalendarScreen = () => {
+
+    const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month')
+
+    const onDoubleClick = (e) => { }
+    const onSelectedEvent = (e) => { }
+    const onViewChange = (e) => {
+        localStorage.setItem('lastView', e);
+        setLastView(e);
+    }
+
+    const myEventsList = [
+        {
+            title: 'Cumple',
+            start: moment().toDate(),
+            end: moment().add(2, 'hours').toDate(),
+            bgcolor: '#fafafafa',
+            user: {
+                _id: '231',
+                name: 'test'
+            }
+        }
+    ]
 
     const eventStyleGetter = (event, start, end, isSelected) => {
         const style = {
@@ -36,16 +52,20 @@ export const CalendarScreen = () => {
     return (
         <div className="calendar-screen">
             <Navbar />
-            <div className="container">
-                <Calendar
-                    localizer={localizer}
-                    events={myEventsList}
-                    startAccessor="start"
-                    endAccessor="end"
-                    messages={messages}
-                    eventPropGetter={eventStyleGetter}
-                />
-            </div>
+            <Calendar
+                localizer={localizer}
+                events={myEventsList}
+                startAccessor="start"
+                endAccessor="end"
+                messages={messages}
+                eventPropGetter={eventStyleGetter}
+                onDoubleClickEvent={onDoubleClick}
+                onSelectEvent={onSelectedEvent}
+                onView={onViewChange}
+                view={lastView}
+                components={{ event: CalendarEvent }}
+            />
+            <CalendarModal />
         </div>
     )
 }
