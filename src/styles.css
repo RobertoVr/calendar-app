@@ -62,3 +62,25 @@ body {
   display: flex;
   border: 0px solid gray !important;
 }
+
+/* FABS */
+
+.fab {
+  border-radius: 100%;
+  bottom: 25px;
+  font-size: 25px;
+  padding: 15px;
+  position: fixed;
+  right: 25px;
+  outline: none;
+  border: 0px;
+}
+
+.fab-danger{
+  bottom: 25px;
+  padding: 10px;
+  position: fixed;
+  left: 25px;
+  outline: none;
+  border: 0px;
+}
