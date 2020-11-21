@@ -1,5 +1,3 @@
-
-import moduleName from 'module'
 import { types } from '../types/types'
 
 export const eventAddNew = (event) => ({ type: types.eventAddNew, payload: event });
