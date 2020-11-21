@@ -17,7 +17,7 @@ export const startLogin = (email, password) => {
                 name: body.name
             }));
         } else {
-            Swal.fire('Error', body.msg, 'error');
+            Swal.fire('Error', body.msg || 'Algo salió mal', 'error');
         }
     }
 }
@@ -34,7 +34,7 @@ export const startRegister = (email, password, name) => {
                 name: body.name
             }));
         } else {
-            Swal.fire('Error', body.msg, 'error');
+            Swal.fire('Error', body.msg || 'Algo salió mal', 'error');
         }
     }
 }
