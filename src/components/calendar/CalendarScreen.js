@@ -22,7 +22,7 @@ export const CalendarScreen = () => {
 
     const dispatch = useDispatch();
     const { events, activeEvent } = useSelector(state => state.calendar);
-    const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month')
+    const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
 
     const onDoubleClick = (e) => {
         dispatch(uiOpenModal());
