@@ -5,7 +5,7 @@ import DateTimePicker from 'react-datetime-picker';
 import Swal from 'sweetalert2'
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseModal } from '../../actions/ui';
-import { eventAddNew, eventCleanActiveEvent, eventUpdated } from '../../actions/events';
+import { eventCleanActiveEvent, eventStartAddNew, eventStartUpdated } from '../../actions/events';
 
 const customStyles = {
     content: {
@@ -87,7 +87,7 @@ export const CalendarModal = () => {
     }
     const handleSubmitForm = (e) => {
         e.preventDefault();
-        console.log(formValues)
+
         const momentStart = moment(start);
         const momentEnd = moment(end);
 
@@ -105,16 +105,9 @@ export const CalendarModal = () => {
 
         // todo realizar grabación
         if (activeEvent) {
-            dispatch(eventUpdated(formValues));
+            dispatch(eventStartUpdated(formValues));
         } else {
-            dispatch(eventAddNew({
-                ...formValues,
-                id: new Date().getTime(),
-                user: {
-                    _id: '123123',
-                    name: 'Roberto'
-                }
-            }));
+            dispatch(eventStartAddNew(formValues));
         }
 
         setTitleValid(true);
